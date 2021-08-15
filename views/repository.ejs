@@ -1,0 +1,104 @@
+<div>
+    <% if (isLoggedIn) { %>
+        <div class="mt-3 mb-3">
+            <% if(privatePublicShared == 1){ %>
+                <h1 class="text-center">Personal repository:</h1>
+            <% } else if(privatePublicShared == 2){ %>
+                <h1 class="text-center">Public repository:</h1>
+            <% } else if(privatePublicShared == 3){ %>
+                <h1 class="text-center">Shared repository:</h1>
+            <% } else { %>
+                <h1 class="text-center">Admin repository:</h1>
+        </div>
+        <% } %>
+        <% if(privatePublicShared == 1){ %>
+    <form class="mx-auto mb-3" style="width: 500px" action="/repository/findPrivate" method="post">
+        <% } else if(privatePublicShared == 2){ %>
+        <form class="mx-auto mb-3" style="width: 500px" action="/repository/findPublic" method="post">
+            <% } else if(privatePublicShared == 3){ %>
+            <form class="mx-auto mb-3" style="width: 500px" action="/repository/findShared" method="post">
+                <% } else{ %>
+                <form class="mx-auto mb-3" style="width: 500px" action="/repository/findAdmin" method="post">
+                    <% } %>
+                    <label for="publicSearch">Search data:</label>
+                    <input type="text" id="search" name="fileName">
+                    &nbsp&nbsp
+                    <button type="submit" class="actbutton">Search</button>
+                </form>
+                <% } %>
+                <div class="ml-5 mr-5">
+                    <table class="mt-3 table table-hover">
+                        <thead>
+                        <tr class="table-header">
+                            <th>Name:</th>
+                            <th>Owner:</th>
+                            <th>Upload date:</th>
+                            <th>Type:</th>
+                            <th>Is private:</th>
+                            <th>Download:</th>
+                            <% if (!publicOrShared) { %>
+
+                                <% if (isLoggedIn) { %>
+                                    <th>Delete:</th>
+                                    <th>Accessible to:</th>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% var i = 0 %>
+                        <% files.forEach(function(file) { %>
+                            <% i++ %>
+                            <tr>
+                                <td><%= file.originalname.split('.')[0] %></td>
+                                <td><%= file.uploadedBy.username %></td>
+                                <td><%= file.date%></td>
+                                <td><%= file.originalname.split('.')[1] %></td>
+                                <td>
+                                    <% if(file.isPrivate) { %>
+                                        <i class="fa fa-2x fa-check" aria-hidden="true"></i>
+                                    <% } else { %>
+                                        <i class="fa fa-2x fa-times" aria-hidden="true"></i>
+                                    <% } %>
+                                </td>
+                                <td><a href="/repository/file/download/<%= file._id %>">
+                                        <i class="fa fa-2x fa-download" aria-hidden="true" id="download"></i>
+                                    </a></td>
+                                <% if (!publicOrShared) { %>
+                                    <% if (isLoggedIn) { %>
+                                        <td>
+                                            <form action="/repository/file/delete/<%= file._id %>" method="post">
+                                                <button style="border-width: 0px; background-color: unset" type="submit" name="deleteBtn" value="Del file"><i
+                                                            class="fa fa-2x fa-trash-o"></i></button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <div>
+                                                    <tr><%= file.accessibleTo.map(user => {
+                                                                    return user.username
+                                                                }
+                                                        )
+                                                        %></tr>
+                                                </div>
+                                                <br>
+                                                <form action="/repository/file/addUser/<%= file._id %>" method="post"
+                                                      id="<%= file._id %>">
+                                                    <input type="text" name="<%= file._id %>"/>
+                                                    <input type="submit" value="Add user"/>
+                                                </form>
+                                                <form action="/repository/file/deleteUser/<%= file._id %>" method="post"
+                                                      id="form2">
+                                                    <input type="text" name="<%= file._id %>">
+                                                    <input type="submit" value="Del user"/>
+                                                </form>
+                                            </table>
+                                        </td>
+                                    <% } %>
+                                <% } %>
+                            </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+</div>

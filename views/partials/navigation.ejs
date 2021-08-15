@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">D&F SHARE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/repository/public">Public</a>
+            </li>
+            <% if(isLoggedIn){ %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/repository/private">Private</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/repository/shared">Shared</a>
+                </li>
+                <% if(isAdmin){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/repository/admin">Admin</a>
+                    </li>
+                    <% } %>
+
+                        <% } %>
+        </ul>
+        <ul class="navbar-nav">
+            <% if(isLoggedIn){ %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Log out</a>
+                </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/register">Register</a>
+                    </li>
+                    <% } %>
+        </ul>
+    </div>
+</nav>

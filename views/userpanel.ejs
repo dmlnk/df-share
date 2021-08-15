@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center mt-3">
+    <form class="card p-3 " action="/repository/file/upload" method="post"
+          enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"><h2 class="text-center">Import file from your
+                    PC</h2></label>
+            <div>
+                <input type="file" name="filedata" aria-describedby="emailHelp"/>
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="checkbox"  id="check1" name="isPrivate"> is private?
+        </div>
+        <button type="submit" class="btn" id="submitFileButton">Submit</button>
+    </form>
+</div>

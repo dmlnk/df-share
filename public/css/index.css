@@ -1,0 +1,60 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #eeeeee;
+    font-size: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    background-color: #cecece;
+    font-weight: bold;
+}
+
+a:hover, input:hover {
+    color: #1abc9c !important;
+}
+
+.active > a {
+    color: #1abc9c !important;;
+}
+
+.public-repo-button {
+    color: black;
+}
+
+.public-repo-button:link {
+    text-decoration: none;
+    color: black;
+}
+
+button {
+    border-radius: 3px;
+    border-width: 1px;
+}
+
+#download {
+    color: black;
+}
+
+.table-header {
+    background-color: #d2f1eb;
+}
+
+input[type="file"] {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#submitFileButton {
+    font-size: 18px;
+    background-color: #a2e7d9;
+}
